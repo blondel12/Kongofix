@@ -44,12 +44,12 @@ export const Route = createRootRoute({
       { name: "apple-mobile-web-app-title", content: "KongoFix" },
       { property: "og:title", content: "KongoFix — Services techniques à domicile en République du Congo" },
       { property: "og:description", content: "Trouvez rapidement un électricien, plombier, menuisier ou climatiseur qualifié au Congo. Intervention rapide, techniciens vérifiés, prix transparents." },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "KongoFix — Services techniques à domicile en République du Congo" },
       { name: "twitter:description", content: "Trouvez rapidement un électricien, plombier, menuisier ou climatiseur qualifié au Congo." },
-      { name: "twitter:image", content: "/logo.svg" },
+      { name: "twitter:image", content: "/og-image.svg" },
       { name: "google-site-verification", content: "A_METTRE_APRES_VERIFICATION" },
     ],
     links: [
@@ -71,7 +71,7 @@ export const Route = createRootRoute({
           "description": "Services techniques à domicile en République du Congo — plomberie, électricité, climatisation, menuiserie et plus encore.",
           "url": "https://kongofix.com",
           "logo": "https://kongofix.com/logo.svg",
-          "image": "https://kongofix.com/logo.svg",
+          "image": "https://kongofix.com/og-image.svg",
           "telephone": "+242065431806",
           "areaServed": [
             { "@type": "Country", "name": "République du Congo" },

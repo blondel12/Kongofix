@@ -7,7 +7,7 @@ export const Route = createFileRoute("/cgu")({
       { name: "description", content: "Conditions Générales d'Utilisation de KongoFix — plateforme de mise en relation entre clients et techniciens qualifiés en République du Congo." },
       { property: "og:title", content: "Conditions Générales d'Utilisation — KongoFix" },
       { property: "og:description", content: "Conditions Générales d'Utilisation de KongoFix — plateforme de mise en relation entre clients et techniciens qualifiés en République du Congo." },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
   }),

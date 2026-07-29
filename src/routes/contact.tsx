@@ -32,7 +32,7 @@ export const Route = createFileRoute("/contact")({
       { name: "description", content: "Contactez KongoFix — services techniques à domicile en République du Congo. Téléphone, email et formulaire de contact disponibles." },
       { property: "og:title", content: "Contact — KongoFix" },
       { property: "og:description", content: "Contactez KongoFix — services techniques à domicile en République du Congo. Téléphone, email et formulaire de contact disponibles." },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
     scripts: [

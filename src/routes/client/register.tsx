@@ -12,7 +12,7 @@ export const Route = createFileRoute("/client/register")({
     meta: [
       { title: "Créer un compte — KongoFix" },
       { property: "og:title", content: "Créer un compte — KongoFix" },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
   }),

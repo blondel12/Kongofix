@@ -13,7 +13,7 @@ export const Route = createFileRoute("/technicien/login")({
     meta: [
       { title: "Espace technicien — KongoFix" },
       { property: "og:title", content: "Espace technicien — KongoFix" },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
   }),

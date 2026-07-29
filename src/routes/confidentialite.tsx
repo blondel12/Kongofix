@@ -7,7 +7,7 @@ export const Route = createFileRoute("/confidentialite")({
       { name: "description", content: "Politique de confidentialité de KongoFix — découvrez comment nous collectons, utilisons et protégeons vos données personnelles en République du Congo." },
       { property: "og:title", content: "Politique de confidentialité — KongoFix" },
       { property: "og:description", content: "Politique de confidentialité de KongoFix — découvrez comment nous collectons, utilisons et protégeons vos données personnelles." },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
   }),

@@ -19,7 +19,7 @@ export const Route = createFileRoute("/client")({
       { title: "Trouver un technicien — KongoFix" },
       { name: "description", content: "Trouvez un technicien qualifié près de chez vous au Congo : plombier, électricien, menuisier, climatiseur." },
       { property: "og:title", content: "Trouver un technicien — KongoFix" },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
     scripts: [

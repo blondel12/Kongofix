@@ -49,7 +49,7 @@ export const Route = createFileRoute("/client/urgence")({
       { name: "description", content: "Besoin urgent d'un technicien ? Intervention rapide disponible 24h/24 et 7j/7 en République du Congo." },
       { property: "og:title", content: "Urgence 24/24 — KongoFix" },
       { property: "og:description", content: "Besoin urgent d'un technicien ? Intervention rapide disponible 24h/24 et 7j/7 en République du Congo." },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
   }),

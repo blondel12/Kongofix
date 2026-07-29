@@ -51,7 +51,7 @@ export const Route = createFileRoute("/client/demander")({
       { name: "description", content: "Décrivez votre besoin, choisissez une date et recevez une mise en relation avec un technicien qualifié près de chez vous." },
       { property: "og:title", content: "Demander une intervention — KongoFix" },
       { property: "og:description", content: "Décrivez votre besoin, choisissez une date et recevez une mise en relation avec un technicien qualifié près de chez vous." },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
     scripts: [

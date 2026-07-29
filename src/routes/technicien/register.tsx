@@ -18,7 +18,7 @@ export const Route = createFileRoute("/technicien/register")({
       { name: "description", content: "Rejoignez KongoFix et développez votre clientèle. Inscrivez-vous comme technicien qualifié et recevez des demandes d'intervention." },
       { property: "og:title", content: "Devenir technicien — KongoFix" },
       { property: "og:description", content: "Rejoignez KongoFix et développez votre clientèle. Inscrivez-vous comme technicien qualifié et recevez des demandes d'intervention." },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
   }),

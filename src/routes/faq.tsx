@@ -130,7 +130,7 @@ export const Route = createFileRoute("/faq")({
         content:
           "Questions fréquentes sur KongoFix : fonctionnement, tarifs, inscription technicien, zones couvertes, urgences et plus.",
       },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { property: "og:url", content: "https://kongofix.com/faq" },
       { name: "twitter:card", content: "summary" },
     ],

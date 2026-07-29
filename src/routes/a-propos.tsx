@@ -30,7 +30,7 @@ export const Route = createFileRoute("/a-propos")({
       { name: "description", content: "Découvrez la mission, les valeurs et l'équipe derrière KongoFix — la plateforme de mise en relation avec les meilleurs techniciens en République du Congo." },
       { property: "og:title", content: "À propos — KongoFix" },
       { property: "og:description", content: "Découvrez la mission, les valeurs et l'équipe derrière KongoFix — la plateforme de mise en relation avec les meilleurs techniciens en République du Congo." },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
     scripts: [

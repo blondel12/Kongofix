@@ -42,7 +42,7 @@ export const Route = createFileRoute("/client/")({
       { name: "description", content: "Parcourez les profils de techniciens qualifiés par spécialité, ville et note. Électriciens, plombiers, climatiseurs et plus au Congo." },
       { property: "og:title", content: "Trouver un technicien — KongoFix" },
       { property: "og:description", content: "Parcourez les profils de techniciens qualifiés par spécialité, ville et note. Électriciens, plombiers, climatiseurs et plus au Congo." },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
   }),

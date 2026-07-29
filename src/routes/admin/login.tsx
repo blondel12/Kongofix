@@ -13,7 +13,7 @@ export const Route = createFileRoute("/admin/login")({
     meta: [
       { title: "Administration — KongoFix" },
       { property: "og:title", content: "Administration — KongoFix" },
-      { property: "og:image", content: "/logo.svg" },
+      { property: "og:image", content: "/og-image.svg" },
       { name: "twitter:card", content: "summary" },
     ],
   }),
