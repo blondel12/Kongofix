@@ -150,6 +150,9 @@ function FooterLegal() {
           <Link to="/faq" className="hover:text-foreground transition-colors">
             FAQ
           </Link>
+          <Link to="/charte-techniciens" className="hover:text-foreground transition-colors">
+            Charte tech.
+          </Link>
           <Link to="/cgu" className="hover:text-foreground transition-colors">
             CGU
           </Link>

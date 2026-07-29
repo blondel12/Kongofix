@@ -13,6 +13,7 @@
   <url><loc>https://kongofix.com/contact</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://kongofix.com/a-propos</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://kongofix.com/faq</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://kongofix.com/charte-techniciens</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
   <url><loc>https://kongofix.com/client/technicien/1</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://kongofix.com/client/technicien/2</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://kongofix.com/client/technicien/3</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>

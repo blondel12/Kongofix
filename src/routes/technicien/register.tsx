@@ -512,8 +512,8 @@ function TechnicianRegisterPage() {
           />
           <span className="text-sm">
             J'accepte les{" "}
-            <span className="text-primary underline">conditions d'utilisation</span> et la{" "}
-            <span className="text-primary underline">charte des techniciens</span> KongoFix.
+            <a href="/cgu" target="_blank" rel="noopener noreferrer" className="text-primary underline">conditions d'utilisation</a> et la{" "}
+            <a href="/charte-techniciens" target="_blank" rel="noopener noreferrer" className="text-primary underline">charte des techniciens</a> KongoFix.
             Je certifie que les informations fournies sont exactes.
           </span>
         </label>
