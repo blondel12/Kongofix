@@ -3,6 +3,109 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
 import { cn } from "~/lib/utils";
 
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Comment ça marche ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "C'est très simple ! Vous décrivez votre besoin en choisissant un service (plomberie, électricité, climatisation, menuiserie, etc.), vous indiquez votre adresse et la date souhaitée. Un technicien qualifié et vérifié accepte votre demande, puis intervient chez vous. Une fois l'intervention terminée, vous pouvez noter le technicien pour aider la communauté.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Combien ça coûte ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "KongoFix est gratuit pour les clients — l'utilisation de la plateforme ne vous coûte rien. Le prix de l'intervention est convenu directement entre vous et le technicien. Chaque technicien affiche ses tarifs indicatifs sur son profil pour vous aider à choisir en toute transparence.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Comment payer ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vous pouvez payer directement le technicien après l'intervention, en espèces ou par Mobile Money (Airtel Money, MTN Mobile Money). KongoFix ne prélève aucun frais sur les clients.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Quel est le délai d'intervention ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le délai dépend de la disponibilité des techniciens dans votre zone. En général, une demande standard est acceptée sous 24 à 48 heures. Pour les urgences (fuite d'eau, panne électrique), utilisez notre bouton « Urgence 24/24 » pour une intervention prioritaire.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Et si je ne suis pas satisfait ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Votre satisfaction est notre priorité. Si l'intervention ne vous convient pas, vous pouvez contacter notre service client via le formulaire de contact ou WhatsApp. Nous intervenons pour trouver une solution. Vous pouvez également laisser un avis honnête sur le profil du technicien pour informer les autres clients.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Comment s'inscrire comme technicien ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Rendez-vous sur la page « Espace Technicien » et cliquez sur « S'inscrire ». Remplissez le formulaire avec vos informations personnelles et professionnelles. Votre compte sera examiné par notre équipe sous 48 heures.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Quels documents fournir ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pour valider votre inscription, vous devez fournir : une pièce d'identité (CNI ou passeport), une photo professionnelle, et toute certification ou diplôme attestant de vos compétences (facultatif mais recommandé pour augmenter votre crédibilité).",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Comment sont attribuées les demandes ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Lorsqu'un client soumet une demande, celle-ci est visible par les techniciens de la spécialité concernée dans la zone géographique. Le premier technicien disponible peut accepter la demande. Il n'y a pas d'attribution automatique : vous restez maître de votre planning.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Combien ça coûte pour un technicien ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "L'inscription et l'utilisation de base de KongoFix sont gratuites pour les techniciens. À l'avenir, des options premium (mise en avant du profil, accès prioritaire aux demandes) pourront être proposées, mais la plateforme restera toujours accessible gratuitement.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Quelles zones sont couvertes ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "KongoFix est disponible dans toute la République du Congo, avec une concentration de techniciens à Brazzaville et Pointe-Noire. Nous étendons continuellement notre couverture — si votre zone n'est pas encore bien desservie, n'hésitez pas à nous contacter.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Comment fonctionnent les urgences 24/24 ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Le service d'urgence est accessible via le bouton « Urgence 24/24 » sur la page d'accueil. Il vous permet de soumettre une demande prioritaire qui sera traitée en priorité par les techniciens disponibles, même en dehors des heures normales (soirées, week-ends). Un supplément peut s'appliquer selon le technicien.",
+      },
+    },
+    {
+      "@type": "Question",
+      "name": "Comment contacter KongoFix ?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Vous pouvez nous contacter par plusieurs canaux : via notre page Contact (formulaire en ligne), par WhatsApp au +242 06 543 18 06, par email à contact@kongofix.com, ou via nos réseaux sociaux Facebook. Nous répondons sous 24 heures ouvrées.",
+      },
+    },
+  ],
+});
+
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
@@ -21,6 +124,12 @@ export const Route = createFileRoute("/faq")({
       { property: "og:image", content: "/logo.svg" },
       { property: "og:url", content: "https://kongofix.com/faq" },
       { name: "twitter:card", content: "summary" },
+    ],
+    scripts: [
+      {
+        children: faqJsonLd,
+        type: "application/ld+json",
+      },
     ],
   }),
   component: FaqPage,
