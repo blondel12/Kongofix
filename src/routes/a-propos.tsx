@@ -14,6 +14,15 @@ import {
 import { Button } from "~/components/ui/button";
 import { Card, CardContent } from "~/components/ui/card";
 
+const aProposBreadcrumbJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kongofix.com/" },
+    { "@type": "ListItem", "position": 2, "name": "À propos", "item": "https://kongofix.com/a-propos" },
+  ],
+});
+
 export const Route = createFileRoute("/a-propos")({
   head: () => ({
     meta: [
@@ -23,6 +32,9 @@ export const Route = createFileRoute("/a-propos")({
       { property: "og:description", content: "Découvrez la mission, les valeurs et l'équipe derrière KongoFix — la plateforme de mise en relation avec les meilleurs techniciens en République du Congo." },
       { property: "og:image", content: "/logo.svg" },
       { name: "twitter:card", content: "summary" },
+    ],
+    scripts: [
+      { children: aProposBreadcrumbJsonLd, type: "application/ld+json" },
     ],
   }),
   component: AProposPage,

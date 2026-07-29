@@ -72,9 +72,9 @@ function ClientLoginPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
             {error && (
-              <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+              <div id="login-error" className="rounded-md bg-destructive/10 p-3 text-sm text-destructive" role="alert">
                 {error}
               </div>
             )}
@@ -89,6 +89,9 @@ function ClientLoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
                 disabled={loading}
+                aria-required="true"
+                aria-invalid={!!error}
+                aria-describedby={error ? "login-error" : undefined}
               />
             </div>
 
@@ -112,6 +115,9 @@ function ClientLoginPage() {
                   autoComplete="current-password"
                   disabled={loading}
                   className="pr-10"
+                  aria-required="true"
+                  aria-invalid={!!error}
+                  aria-describedby={error ? "login-error" : undefined}
                 />
                 <button
                   type="button"

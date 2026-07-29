@@ -124,7 +124,7 @@ function RootComponent() {
     <RootDocument>
       <Header />
       <div className="flex flex-col min-h-dvh">
-        <main className="flex-1">
+        <main id="main-content" className="flex-1" tabIndex={-1}>
           <Outlet />
         </main>
         <FooterLegal />
@@ -169,6 +169,12 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body className="min-h-dvh bg-background text-foreground antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg focus:outline-none"
+        >
+          Aller au contenu
+        </a>
         {children}
         <Scripts />
       </body>
@@ -228,12 +234,13 @@ function Header() {
         <Link
           to="/"
           className="flex items-center gap-2 font-bold text-lg hover:opacity-80 transition-opacity"
+          aria-label="Page d'accueil"
         >
           <img src="/logo.svg" alt="KongoFix" class="h-8" />
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-1" aria-label="Navigation principale">
           {navLinks.map((link) => (
             <Button key={link.to} variant="ghost" asChild>
               <Link to={link.to}>{link.label}</Link>
@@ -294,7 +301,7 @@ function Header() {
         {/* Mobile Nav */}
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" aria-label="Menu">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Menu</span>
             </Button>

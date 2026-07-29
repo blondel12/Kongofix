@@ -7,6 +7,15 @@ import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { Label } from "~/components/ui/label";
 
+const contactBreadcrumbJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kongofix.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://kongofix.com/contact" },
+  ],
+});
+
 // WhatsApp SVG icon component
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -25,6 +34,9 @@ export const Route = createFileRoute("/contact")({
       { property: "og:description", content: "Contactez KongoFix — services techniques à domicile en République du Congo. Téléphone, email et formulaire de contact disponibles." },
       { property: "og:image", content: "/logo.svg" },
       { name: "twitter:card", content: "summary" },
+    ],
+    scripts: [
+      { children: contactBreadcrumbJsonLd, type: "application/ld+json" },
     ],
   }),
   component: ContactPage,

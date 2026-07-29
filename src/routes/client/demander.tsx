@@ -30,6 +30,16 @@ import { mockTechnicians, type MockTechnician } from "~/data/mock-technicians";
 import { submitRequest } from "~/server/requests";
 import { loadSession, type SessionData } from "~/lib/session";
 
+const demanderBreadcrumbJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kongofix.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Trouver un technicien", "item": "https://kongofix.com/client" },
+    { "@type": "ListItem", "position": 3, "name": "Demander une intervention", "item": "https://kongofix.com/client/demander" },
+  ],
+});
+
 // ---------------------------------------------------------------------------
 // Route definition
 // ---------------------------------------------------------------------------
@@ -43,6 +53,9 @@ export const Route = createFileRoute("/client/demander")({
       { property: "og:description", content: "Décrivez votre besoin, choisissez une date et recevez une mise en relation avec un technicien qualifié près de chez vous." },
       { property: "og:image", content: "/logo.svg" },
       { name: "twitter:card", content: "summary" },
+    ],
+    scripts: [
+      { children: demanderBreadcrumbJsonLd, type: "application/ld+json" },
     ],
   }),
   component: DemanderInterventionPage,
@@ -566,9 +579,12 @@ function Step2Details({
               min={getTomorrow()}
               value={formData.date}
               onChange={(e) => updateField("date", e.target.value)}
+              aria-required="true"
+              aria-invalid={!!errors.date}
+              aria-describedby={errors.date ? "err-date" : undefined}
             />
             {errors.date && (
-              <p className="text-xs text-destructive flex items-center gap-1">
+              <p id="err-date" className="text-xs text-destructive flex items-center gap-1" role="alert">
                 <AlertTriangle className="h-3 w-3" />
                 {errors.date}
               </p>
@@ -596,7 +612,7 @@ function Step2Details({
               ))}
             </div>
             {errors.timeSlot && (
-              <p className="text-xs text-destructive flex items-center gap-1">
+              <p id="err-timeSlot" className="text-xs text-destructive flex items-center gap-1" role="alert">
                 <AlertTriangle className="h-3 w-3" />
                 {errors.timeSlot}
               </p>
@@ -670,9 +686,12 @@ function Step2Details({
                 placeholder="Rue / Avenue"
                 value={formData.street}
                 onChange={(e) => updateField("street", e.target.value)}
+                aria-required="true"
+                aria-invalid={!!errors.street}
+                aria-describedby={errors.street ? "err-street" : undefined}
               />
               {errors.street && (
-                <p className="text-xs text-destructive mt-1">{errors.street}</p>
+                <p id="err-street" className="text-xs text-destructive mt-1" role="alert">{errors.street}</p>
               )}
             </div>
             <div>
@@ -680,9 +699,12 @@ function Step2Details({
                 placeholder="Quartier"
                 value={formData.neighborhood}
                 onChange={(e) => updateField("neighborhood", e.target.value)}
+                aria-required="true"
+                aria-invalid={!!errors.neighborhood}
+                aria-describedby={errors.neighborhood ? "err-neighborhood" : undefined}
               />
               {errors.neighborhood && (
-                <p className="text-xs text-destructive mt-1">{errors.neighborhood}</p>
+                <p id="err-neighborhood" className="text-xs text-destructive mt-1" role="alert">{errors.neighborhood}</p>
               )}
             </div>
             <div className="sm:col-span-2">
@@ -690,9 +712,12 @@ function Step2Details({
                 placeholder="Ville"
                 value={formData.city}
                 onChange={(e) => updateField("city", e.target.value)}
+                aria-required="true"
+                aria-invalid={!!errors.city}
+                aria-describedby={errors.city ? "err-city" : undefined}
               />
               {errors.city && (
-                <p className="text-xs text-destructive mt-1">{errors.city}</p>
+                <p id="err-city" className="text-xs text-destructive mt-1" role="alert">{errors.city}</p>
               )}
             </div>
           </div>
@@ -707,10 +732,13 @@ function Step2Details({
             rows={4}
             value={formData.description}
             onChange={(e) => updateField("description", e.target.value)}
+            aria-required="true"
+            aria-invalid={!!errors.description}
+            aria-describedby={errors.description ? "err-description" : undefined}
           />
           <div className="flex justify-between">
             {errors.description ? (
-              <p className="text-xs text-destructive flex items-center gap-1">
+              <p id="err-description" className="text-xs text-destructive flex items-center gap-1" role="alert">
                 <AlertTriangle className="h-3 w-3" />
                 {errors.description}
               </p>

@@ -4,7 +4,28 @@ import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import { loadSession } from "~/lib/session";
 
+const clientBreadcrumbJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kongofix.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Trouver un technicien", "item": "https://kongofix.com/client" },
+  ],
+});
+
 export const Route = createFileRoute("/client")({
+  head: () => ({
+    meta: [
+      { title: "Trouver un technicien — KongoFix" },
+      { name: "description", content: "Trouvez un technicien qualifié près de chez vous au Congo : plombier, électricien, menuisier, climatiseur." },
+      { property: "og:title", content: "Trouver un technicien — KongoFix" },
+      { property: "og:image", content: "/logo.svg" },
+      { name: "twitter:card", content: "summary" },
+    ],
+    scripts: [
+      { children: clientBreadcrumbJsonLd, type: "application/ld+json" },
+    ],
+  }),
   component: ClientLayout,
 });
 

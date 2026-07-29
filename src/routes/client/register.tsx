@@ -97,9 +97,9 @@ function ClientRegisterPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
             {error && (
-              <div className="rounded-md bg-destructive/10 p-3 text-sm text-destructive">
+              <div id="register-error" className="rounded-md bg-destructive/10 p-3 text-sm text-destructive" role="alert">
                 {error}
               </div>
             )}
@@ -113,9 +113,12 @@ function ClientRegisterPage() {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 disabled={loading}
+                aria-required="true"
+                aria-invalid={!!fieldErrors.fullName}
+                aria-describedby={fieldErrors.fullName ? "err-fullName" : undefined}
               />
               {fieldErrors.fullName && (
-                <p className="text-xs text-destructive">{fieldErrors.fullName}</p>
+                <p id="err-fullName" className="text-xs text-destructive" role="alert">{fieldErrors.fullName}</p>
               )}
             </div>
 
@@ -128,9 +131,12 @@ function ClientRegisterPage() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 disabled={loading}
+                aria-required="true"
+                aria-invalid={!!fieldErrors.phone}
+                aria-describedby={fieldErrors.phone ? "err-phone" : undefined}
               />
               {fieldErrors.phone && (
-                <p className="text-xs text-destructive">{fieldErrors.phone}</p>
+                <p id="err-phone" className="text-xs text-destructive" role="alert">{fieldErrors.phone}</p>
               )}
             </div>
 
@@ -144,9 +150,12 @@ function ClientRegisterPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="email"
                 disabled={loading}
+                aria-required="true"
+                aria-invalid={!!fieldErrors.email}
+                aria-describedby={fieldErrors.email ? "err-email" : undefined}
               />
               {fieldErrors.email && (
-                <p className="text-xs text-destructive">{fieldErrors.email}</p>
+                <p id="err-email" className="text-xs text-destructive" role="alert">{fieldErrors.email}</p>
               )}
             </div>
 
@@ -162,6 +171,9 @@ function ClientRegisterPage() {
                   autoComplete="new-password"
                   disabled={loading}
                   className="pr-10"
+                  aria-required="true"
+                  aria-invalid={!!fieldErrors.password}
+                  aria-describedby={fieldErrors.password ? "err-password" : undefined}
                 />
                 <button
                   type="button"
@@ -186,9 +198,12 @@ function ClientRegisterPage() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 autoComplete="new-password"
                 disabled={loading}
+                aria-required="true"
+                aria-invalid={!!fieldErrors.confirmPassword}
+                aria-describedby={fieldErrors.confirmPassword ? "err-confirmPassword" : undefined}
               />
               {fieldErrors.confirmPassword && (
-                <p className="text-xs text-destructive">{fieldErrors.confirmPassword}</p>
+                <p id="err-confirmPassword" className="text-xs text-destructive" role="alert">{fieldErrors.confirmPassword}</p>
               )}
             </div>
 

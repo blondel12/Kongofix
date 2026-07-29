@@ -3,6 +3,15 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
 import { cn } from "~/lib/utils";
 
+const faqBreadcrumbJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kongofix.com/" },
+    { "@type": "ListItem", "position": 2, "name": "FAQ", "item": "https://kongofix.com/faq" },
+  ],
+});
+
 const faqJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -126,6 +135,7 @@ export const Route = createFileRoute("/faq")({
       { name: "twitter:card", content: "summary" },
     ],
     scripts: [
+      { children: faqBreadcrumbJsonLd, type: "application/ld+json" },
       {
         children: faqJsonLd,
         type: "application/ld+json",
