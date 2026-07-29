@@ -125,3 +125,19 @@ export async function ensureReviewsTable(): Promise<void> {
   `);
   console.log("[PostgreSQL] ✅ Table reviews vérifiée/créée");
 }
+
+// ---------------------------------------------------------------------------
+// Table: waitlist
+// ---------------------------------------------------------------------------
+
+export async function ensureWaitlistTable(): Promise<void> {
+  const pool = getPool();
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS waitlist (
+      id SERIAL PRIMARY KEY,
+      email VARCHAR(255) NOT NULL UNIQUE,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    )
+  `);
+  console.log("[PostgreSQL] ✅ Table waitlist vérifiée/créée");
+}

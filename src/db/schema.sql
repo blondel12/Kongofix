@@ -188,6 +188,15 @@ CREATE INDEX IF NOT EXISTS idx_payments_client ON payments(client_id);
 CREATE INDEX IF NOT EXISTS idx_payments_request ON payments(request_id);
 
 -- ============================================================
+-- Table : waitlist (newsletter)
+-- ============================================================
+CREATE TABLE IF NOT EXISTS waitlist (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ============================================================
 -- Insertion des catégories de services par défaut
 -- ============================================================
 INSERT INTO service_categories (name, icon, slug, tech_count, created_at) VALUES

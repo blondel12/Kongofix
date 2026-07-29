@@ -10,6 +10,9 @@ import {
   Wrench,
   UserCheck,
   ChevronRight,
+  Mail,
+  Loader2,
+  CheckCircle2,
 } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/components/ui/card";
@@ -25,6 +28,7 @@ import {
 } from "~/components/ui/select";
 import { categories } from "~/data/categories";
 import { mockTechnicians } from "~/data/mock-technicians";
+import { subscribeToWaitlist } from "~/server/waitlist";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -66,6 +70,9 @@ function Home() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [newsletterMessage, setNewsletterMessage] = useState("");
 
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
@@ -78,6 +85,37 @@ function Home() {
 
   const handleCategoryClick = (slug: string) => {
     router.navigate({ to: `/client?categorie=${slug}` });
+  };
+
+  const handleNewsletterSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const email = newsletterEmail.trim();
+    // Validation email côté client
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      setNewsletterStatus("error");
+      setNewsletterMessage("Veuillez entrer une adresse email valide.");
+      return;
+    }
+
+    setNewsletterStatus("loading");
+    setNewsletterMessage("");
+
+    try {
+      const result = await subscribeToWaitlist({ data: { email } });
+      if (result.success) {
+        setNewsletterStatus("success");
+        setNewsletterMessage(result.message);
+        setNewsletterEmail("");
+      } else {
+        setNewsletterStatus("error");
+        setNewsletterMessage(result.message);
+      }
+    } catch {
+      setNewsletterStatus("error");
+      setNewsletterMessage("Une erreur est survenue. Veuillez réessayer.");
+    }
   };
 
   return (
@@ -388,7 +426,70 @@ function Home() {
         </div>
       </section>
 
-      {/* ========== 6. FOOTER ========== */}
+      {/* ========== 7. NEWSLETTER / WAITLIST ========== */}
+      <section className="px-6 py-16 bg-primary/5">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Mail className="h-8 w-8 text-primary" />
+            <h2 className="text-3xl font-bold">Restez informé !</h2>
+          </div>
+          <p className="text-muted-foreground text-lg mb-8">
+            Lancement imminent — Inscrivez-vous pour recevoir les actualités et offres de lancement KongoFix.
+          </p>
+
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+            <Input
+              type="email"
+              placeholder="votre@email.com"
+              className="h-12 text-base flex-1"
+              value={newsletterEmail}
+              onChange={(e) => {
+                setNewsletterEmail(e.target.value);
+                if (newsletterStatus !== "idle") setNewsletterStatus("idle");
+              }}
+              disabled={newsletterStatus === "loading"}
+              aria-label="Adresse email pour la newsletter"
+            />
+            <Button
+              type="submit"
+              size="lg"
+              className="h-12 px-8 text-base"
+              disabled={newsletterStatus === "loading"}
+            >
+              {newsletterStatus === "loading" ? (
+                <>
+                  <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                  Inscription...
+                </>
+              ) : (
+                "S'inscrire"
+              )}
+            </Button>
+          </form>
+
+          {/* Message inline (toast-like) */}
+          {newsletterStatus !== "idle" && (
+            <div
+              className={`mt-4 mx-auto max-w-lg rounded-lg px-4 py-3 text-sm font-medium flex items-center justify-center gap-2 ${
+                newsletterStatus === "success"
+                  ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                  : newsletterStatus === "error"
+                    ? "bg-red-50 text-red-700 border border-red-200"
+                    : "bg-muted text-muted-foreground"
+              }`}
+            >
+              {newsletterStatus === "success" && <CheckCircle2 className="h-4 w-4" />}
+              {newsletterMessage}
+            </div>
+          )}
+
+          <p className="text-xs text-muted-foreground mt-4">
+            🔒 Nous respectons votre vie privée. Pas de spam, désabonnement facile à tout moment.
+          </p>
+        </div>
+      </section>
+
+      {/* ========== FOOTER ========== */}
       <footer className="mt-auto border-t bg-background px-6 py-10">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Logo + name */}
