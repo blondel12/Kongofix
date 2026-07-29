@@ -177,7 +177,7 @@ function TechnicianRegisterPage() {
           <div className="mt-2 flex items-center gap-4">
             <div className="relative h-24 w-24 rounded-full bg-muted flex items-center justify-center overflow-hidden border-2 border-dashed border-muted-foreground/30">
               {form.photoUrl ? (
-                <img src={form.photoUrl} alt="Preview" className="h-full w-full object-cover" />
+                <img src={form.photoUrl} alt="Preview" className="h-full w-full object-cover"  loading="lazy" decoding="async" />
               ) : (
                 <Camera className="h-8 w-8 text-muted-foreground" />
               )}
@@ -383,7 +383,7 @@ function TechnicianRegisterPage() {
                 src={form.identityDoc}
                 alt="Pièce d'identité"
                 className="h-32 rounded-lg border object-cover"
-              />
+               loading="lazy" decoding="async" />
               <button
                 type="button"
                 onClick={() => update("identityDoc", "")}
@@ -426,7 +426,7 @@ function TechnicianRegisterPage() {
                   src={cert}
                   alt={`Certification ${i + 1}`}
                   className="h-20 w-20 rounded-lg border object-cover"
-                />
+                 loading="lazy" decoding="async" />
                 <button
                   type="button"
                   onClick={() => update("certifications", form.certifications.filter((_, j) => j !== i))}
@@ -468,7 +468,7 @@ function TechnicianRegisterPage() {
                   src={img}
                   alt={`Réalisation ${i + 1}`}
                   className="h-20 w-20 rounded-lg border object-cover"
-                />
+                 loading="lazy" decoding="async" />
                 <button
                   type="button"
                   onClick={() => update("portfolio", form.portfolio.filter((_, j) => j !== i))}

@@ -188,7 +188,7 @@ function TechnicianProfilPage() {
             <div className="flex flex-col items-center gap-2">
               <div className="relative h-24 w-24 rounded-full bg-muted flex items-center justify-center overflow-hidden border-2 border-dashed border-muted-foreground/30">
                 {profile.photoUrl ? (
-                  <img src={profile.photoUrl} alt="Photo" className="h-full w-full object-cover" />
+                  <img src={profile.photoUrl} alt="Photo" className="h-full w-full object-cover" loading="lazy" decoding="async" />
                 ) : (
                   <Camera className="h-8 w-8 text-muted-foreground" />
                 )}
@@ -411,7 +411,7 @@ function TechnicianProfilPage() {
                   src={img}
                   alt={`Réalisation ${i + 1}`}
                   className="h-24 w-24 rounded-lg border object-cover"
-                />
+                 loading="lazy" decoding="async" />
                 <button
                   type="button"
                   onClick={() => removePortfolioImage(i)}
@@ -459,6 +459,8 @@ function TechnicianProfilPage() {
                   src={profile.identityDoc}
                   alt="Pièce d'identité"
                   className="h-24 rounded-lg border object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               ) : (
                 <p className="text-sm text-muted-foreground">Non fournie</p>
@@ -476,7 +478,7 @@ function TechnicianProfilPage() {
                       src={cert}
                       alt={`Certification ${i + 1}`}
                       className="h-20 w-20 rounded-lg border object-cover"
-                    />
+                     loading="lazy" decoding="async" />
                   ))}
                 </div>
               ) : (

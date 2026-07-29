@@ -774,6 +774,8 @@ function Step2Details({
                     src={p.url}
                     alt={`Photo ${i + 1}`}
                     className="h-20 w-20 object-cover rounded-lg border"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <button
                     type="button"
@@ -921,6 +923,8 @@ function Step3Summary({
                         src={p.url}
                         alt={`Photo ${i + 1}`}
                         className="h-12 w-12 object-cover rounded border"
+                        loading="lazy"
+                        decoding="async"
                       />
                     ))}
                   </div>

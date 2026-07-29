@@ -1,8 +1,13 @@
 // KongoFix Service Worker
-// Cache-first for static assets, network-first for pages
+// Stale-while-revalidate for static assets, network-first for pages
+// Cache limit: max 50 entries, LRU eviction
 
-const CACHE_NAME = "kongofix-v1";
+const CACHE_NAME = "kongofix-v2";
 const STATIC_ASSETS = ["/", "/manifest.json"];
+const MAX_CACHE_ENTRIES = 50;
+
+// Cache entry tracker for LRU eviction
+const cacheAccessMap = new Map();
 
 // Offline fallback page — styled HTML shown when the user is offline
 const OFFLINE_PAGE = `<!DOCTYPE html>
@@ -108,6 +113,59 @@ const OFFLINE_PAGE = `<!DOCTYPE html>
 </body>
 </html>`;
 
+/**
+ * Limit cache entries using LRU eviction
+ */
+async function trimCache(cache) {
+  const keys = await cache.keys();
+  if (keys.length > MAX_CACHE_ENTRIES) {
+    // Sort by last access time (oldest first)
+    const sorted = keys
+      .map((req) => ({ req, time: cacheAccessMap.get(req.url) || 0 }))
+      .sort((a, b) => a.time - b.time);
+    const toDelete = sorted.slice(0, keys.length - MAX_CACHE_ENTRIES);
+    for (const { req } of toDelete) {
+      await cache.delete(req);
+      cacheAccessMap.delete(req.url);
+    }
+  }
+}
+
+/**
+ * Update cache and record access time
+ */
+async function updateCache(cache, request, response) {
+  cacheAccessMap.set(request.url, Date.now());
+  await cache.put(request, response.clone());
+  await trimCache(cache);
+}
+
+/**
+ * Stale-while-revalidate: return cached version immediately,
+ * then update cache from network in background
+ */
+function staleWhileRevalidate(request) {
+  return caches.open(CACHE_NAME).then(async (cache) => {
+    const cached = await cache.match(request);
+    const networkFetch = fetch(request)
+      .then((response) => {
+        updateCache(cache, request, response);
+        return response;
+      })
+      .catch(() => {
+        // network failed, cached version is fine
+      });
+
+    // Return cached immediately if available
+    if (cached) {
+      // Fire-and-forget the network update
+      return cached;
+    }
+    // No cache: wait for network
+    return networkFetch;
+  });
+}
+
 // Install: cache static assets
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -132,7 +190,7 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Fetch: cache-first for static assets, network-first for pages
+// Fetch: stale-while-revalidate for static, network-first for pages
 self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
 
@@ -149,7 +207,7 @@ self.addEventListener("fetch", (event) => {
         .then((response) => {
           const cloned = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, cloned);
+            updateCache(cache, event.request, cloned);
           });
           return response;
         })
@@ -167,26 +225,13 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // For static assets (JS, CSS, images, fonts): cache-first
+  // For static assets (JS, CSS, images, fonts): stale-while-revalidate
   if (
     url.pathname.startsWith("/assets/") ||
     url.pathname.startsWith("/_build/") ||
     /\.(js|css|png|jpg|jpeg|gif|svg|ico|woff2?|ttf|eot)$/.test(url.pathname)
   ) {
-    event.respondWith(
-      caches.match(event.request).then((cached) => {
-        return (
-          cached ||
-          fetch(event.request).then((response) => {
-            const cloned = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, cloned);
-            });
-            return response;
-          })
-        );
-      })
-    );
+    event.respondWith(staleWhileRevalidate(event.request));
     return;
   }
 
@@ -196,7 +241,7 @@ self.addEventListener("fetch", (event) => {
       .then((response) => {
         const cloned = response.clone();
         caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, cloned);
+          updateCache(cache, event.request, cloned);
         });
         return response;
       })

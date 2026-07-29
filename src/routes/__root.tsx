@@ -61,6 +61,7 @@ export const Route = createRootRoute({
         href: "/logo.svg",
       },
       { rel: "apple-touch-icon", href: "/logo.svg" },
+      { rel: "preload", as: "image", href: "/logo.svg" },
     ],
     scripts: [
       {
@@ -242,7 +243,7 @@ function Header() {
           className="flex items-center gap-2 font-bold text-lg hover:opacity-80 transition-opacity"
           aria-label="Page d'accueil"
         >
-          <img src="/logo.svg" alt="KongoFix" class="h-8" />
+          <img src="/logo.svg" alt="KongoFix" class="h-8" width="32" height="32" decoding="async" />
         </Link>
 
         {/* Desktop Nav */}
@@ -315,7 +316,7 @@ function Header() {
           <SheetContent side="right">
             <SheetHeader className="mb-6">
               <SheetTitle className="flex items-center gap-2">
-                <img src="/logo.svg" alt="KongoFix" class="h-6" />
+                <img src="/logo.svg" alt="KongoFix" class="h-6" width="24" height="24" loading="lazy" decoding="async" />
               </SheetTitle>
             </SheetHeader>
 

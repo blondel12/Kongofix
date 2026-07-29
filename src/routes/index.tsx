@@ -494,7 +494,7 @@ function Home() {
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
           {/* Logo + name */}
           <Link to="/" className="flex items-center gap-2 font-bold text-lg hover:opacity-80 transition-opacity">
-            <img src="/logo.svg" alt="KongoFix" class="h-8" />
+            <img src="/logo.svg" alt="KongoFix" class="h-8" width="32" height="32" loading="lazy" decoding="async" />
           </Link>
 
           {/* Links */}

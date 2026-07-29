@@ -40,7 +40,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         <div className="flex min-h-[80vh] flex-col items-center justify-center px-6 text-center">
           {/* Logo */}
           <div className="mb-8">
-            <img src="/logo.svg" alt="KongoFix" className="h-12 mx-auto" />
+            <img src="/logo.svg" alt="KongoFix" className="h-12 mx-auto" width="48" height="48" loading="lazy" decoding="async" />
           </div>
 
           {/* Icon */}

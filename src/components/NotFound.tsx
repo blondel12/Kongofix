@@ -17,7 +17,7 @@ export function NotFound() {
 
       {/* Logo + Title */}
       <div className="mb-3 flex items-center gap-2">
-        <img src="/logo.svg" alt="KongoFix" className="h-8" />
+        <img src="/logo.svg" alt="KongoFix" className="h-8" width="32" height="32" loading="lazy" decoding="async" />
       </div>
       <h1 className="mb-3 text-3xl font-extrabold tracking-tight sm:text-4xl">
         Page introuvable
