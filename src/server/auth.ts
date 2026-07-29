@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { pgRun as dbRun, pgQuery as dbQuery, pgAll as dbAll, generateUUID, nowISO } from "~/db/postgres";
 import { sendEmailAsync } from "~/lib/email";
 import { otpEmail, welcomeEmail } from "~/lib/email-templates";
+import { checkRateLimit, recordFailedAttempt, resetRateLimit } from "~/lib/rate-limiter";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -141,16 +142,26 @@ export const loginUser = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { email, password } = data;
 
+    // Rate limiting : max 5 tentatives par email par minute
+    const rateCheck = checkRateLimit(`login:${email}`);
+    if (!rateCheck.allowed) {
+      throw new Error(
+        `Trop de tentatives. Réessayez dans ${rateCheck.retryAfterSeconds} seconde${rateCheck.retryAfterSeconds > 1 ? "s" : ""}.`
+      );
+    }
+
     const row = await dbQuery<Record<string, unknown>>(
       "SELECT * FROM users WHERE email = $1",
       email
     );
 
     if (!row) {
+      recordFailedAttempt(`login:${email}`);
       throw new Error("Email ou mot de passe incorrect.");
     }
 
     if (!(await Bun.password.verify(password, row.password_hash as string))) {
+      recordFailedAttempt(`login:${email}`);
       throw new Error("Email ou mot de passe incorrect.");
     }
 
@@ -159,6 +170,9 @@ export const loginUser = createServerFn({ method: "POST" })
         "Votre compte n'est pas encore vérifié. Veuillez vérifier votre téléphone."
       );
     }
+
+    // Connexion réussie → réinitialiser le compteur
+    resetRateLimit(`login:${email}`);
 
     console.log(`[AUTH] 🔑 Connexion: ${row.id} (${email})`);
 

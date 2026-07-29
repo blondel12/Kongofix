@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { pgRun as dbRun, pgQuery as dbQuery, pgAll as dbAll, generateUUID, nowISO } from "~/db/postgres";
 import { sendEmailAsync } from "~/lib/email";
 import { technicianValidated, technicianRejected } from "~/lib/email-templates";
+import { checkRateLimit, recordFailedAttempt, resetRateLimit } from "~/lib/rate-limiter";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -152,18 +153,31 @@ export const loginAdmin = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const { email, password } = data;
 
+    // Rate limiting : max 5 tentatives par email par minute
+    const rateCheck = checkRateLimit(`admin-login:${email}`);
+    if (!rateCheck.allowed) {
+      throw new Error(
+        `Trop de tentatives. Réessayez dans ${rateCheck.retryAfterSeconds} seconde${rateCheck.retryAfterSeconds > 1 ? "s" : ""}.`
+      );
+    }
+
     const row = await dbQuery<Record<string, unknown>>(
       "SELECT * FROM users WHERE email = $1 AND role = 'admin'",
       email
     );
 
     if (!row) {
+      recordFailedAttempt(`admin-login:${email}`);
       throw new Error("Email ou mot de passe incorrect.");
     }
 
     if (row.password_hash !== password) {
+      recordFailedAttempt(`admin-login:${email}`);
       throw new Error("Email ou mot de passe incorrect.");
     }
+
+    // Connexion réussie → réinitialiser le compteur
+    resetRateLimit(`admin-login:${email}`);
 
     console.log(`[ADMIN] 🔑 Connexion: ${email}`);
 
