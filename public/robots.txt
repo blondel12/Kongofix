@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://kongofix.com/sitemap.xml
+
+Disallow: /admin
+Disallow: /api/

@@ -1,0 +1,14 @@
+{
+  "name": "KongoFix",
+  "short_name": "KongoFix",
+  "description": "Services techniques à domicile au Congo",
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    { "src": "/logo.svg", "sizes": "500x120", "type": "image/svg+xml" }
+  ]
+}
