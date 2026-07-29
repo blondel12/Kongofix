@@ -8,6 +8,20 @@ import { getMessages, sendMessage, type Message } from "~/server/messages";
 import { getTechnicianRequests, type TechnicianRequest } from "~/server/technician";
 
 export const Route = createFileRoute("/technicien/messages/")({
+  head: () => ({
+    meta: [
+      { title: "Messages — KongoFix" },
+      { name: "description", content: "Échangez avec vos clients en direct via la messagerie KongoFix." },
+      { property: "og:title", content: "Messages — KongoFix" },
+      { property: "og:description", content: "Échangez avec vos clients en direct via la messagerie KongoFix." },
+      { property: "og:image", content: "/logo.svg" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Messages — KongoFix" },
+      { name: "twitter:description", content: "Échangez avec vos clients en direct via la messagerie KongoFix." },
+      { name: "twitter:image", content: "/logo.svg" },
+    ],
+  }),
   component: TechnicianMessagesPage,
 });
 

@@ -28,6 +28,20 @@ import { METHODS, KONGOFIX_NUMBERS, KONGOFIX_NAME } from "~/data/payment-config"
 import { loadSession } from "~/lib/session";
 
 export const Route = createFileRoute("/client/payment/$requestId")({
+  head: () => ({
+    meta: [
+      { title: "Paiement — KongoFix" },
+      { name: "description", content: "Finalisez le paiement de votre intervention en toute sécurité via Mobile Money ou espèces." },
+      { property: "og:title", content: "Paiement — KongoFix" },
+      { property: "og:description", content: "Finalisez le paiement de votre intervention en toute sécurité via Mobile Money ou espèces." },
+      { property: "og:image", content: "/logo.svg" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Paiement — KongoFix" },
+      { name: "twitter:description", content: "Finalisez le paiement de votre intervention en toute sécurité via Mobile Money ou espèces." },
+      { name: "twitter:image", content: "/logo.svg" },
+    ],
+  }),
   component: PaymentPage,
 });
 

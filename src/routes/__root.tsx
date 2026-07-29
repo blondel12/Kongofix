@@ -29,6 +29,7 @@ import { Avatar, AvatarFallback } from "~/components/ui/avatar";
 import { loadSession, clearSession, type SessionData } from "~/lib/session";
 import { logout } from "~/server/auth";
 import { CookieConsent } from "~/components/CookieConsent";
+import { ErrorBoundary } from "~/components/ErrorBoundary";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -125,7 +126,9 @@ function RootComponent() {
       <Header />
       <div className="flex flex-col min-h-dvh">
         <main id="main-content" className="flex-1" tabIndex={-1}>
-          <Outlet />
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
         </main>
         <FooterLegal />
       </div>

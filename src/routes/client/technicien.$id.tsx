@@ -23,6 +23,29 @@ import { Avatar, AvatarFallback } from "~/components/ui/avatar";
 import { mockTechnicians, type MockTechnician } from "~/data/mock-technicians";
 
 export const Route = createFileRoute("/client/technicien/$id")({
+  head: ({ params }) => {
+    const tech = mockTechnicians.find((t) => t.id === params.id);
+    const title = tech
+      ? `${tech.fullName} (${tech.specialty}) — KongoFix`
+      : "Technicien — KongoFix";
+    const description = tech
+      ? `${tech.specialty} à ${tech.city} — Note ${tech.rating}/5 (${tech.reviewCount} avis) — ${tech.tariff}`
+      : "Trouvez un technicien qualifié près de chez vous avec KongoFix.";
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:image", content: "/logo.svg" },
+        { property: "og:type", content: "profile" },
+        { name: "twitter:card", content: "summary" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+        { name: "twitter:image", content: "/logo.svg" },
+      ],
+    };
+  },
   component: TechnicianProfile,
 });
 

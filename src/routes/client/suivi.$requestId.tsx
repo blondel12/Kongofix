@@ -38,6 +38,20 @@ import {
 } from "~/server/requests";
 
 export const Route = createFileRoute("/client/suivi/$requestId")({
+  head: ({ params }) => ({
+    meta: [
+      { title: `Suivi de votre demande — KongoFix` },
+      { name: "description", content: "Suivez l'avancement de votre demande d'intervention en temps réel — statut, technicien assigné et détails." },
+      { property: "og:title", content: "Suivi de votre demande — KongoFix" },
+      { property: "og:description", content: "Suivez l'avancement de votre demande d'intervention en temps réel." },
+      { property: "og:image", content: "/logo.svg" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Suivi de votre demande — KongoFix" },
+      { name: "twitter:description", content: "Suivez l'avancement de votre demande d'intervention en temps réel." },
+      { name: "twitter:image", content: "/logo.svg" },
+    ],
+  }),
   component: SuiviDemandePage,
 });
 
