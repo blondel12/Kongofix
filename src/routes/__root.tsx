@@ -70,9 +70,9 @@ export const Route = createRootRoute({
           "@type": "LocalBusiness",
           "name": "KongoFix",
           "description": "Services techniques à domicile en République du Congo — plomberie, électricité, climatisation, menuiserie et plus encore.",
-          "url": "https://kongofix.com",
-          "logo": "https://kongofix.com/logo.svg",
-          "image": "https://kongofix.com/og-image.svg",
+          "url": "https://www.kongofix.com",
+          "logo": "https://www.kongofix.com/logo.svg",
+          "image": "https://www.kongofix.com/og-image.svg",
           "telephone": "+242065431806",
           "areaServed": [
             { "@type": "Country", "name": "République du Congo" },

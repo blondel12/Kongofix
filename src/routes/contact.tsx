@@ -11,8 +11,8 @@ const contactBreadcrumbJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kongofix.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://kongofix.com/contact" },
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.kongofix.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://www.kongofix.com/contact" },
   ],
 });
 

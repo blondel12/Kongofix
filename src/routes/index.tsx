@@ -38,7 +38,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "KongoFix — Services techniques à domicile en République du Congo" },
       { property: "og:description", content: "Trouvez rapidement un électricien, plombier, menuisier ou climatiseur qualifié au Congo. Intervention rapide, techniciens vérifiés, prix transparents." },
       { property: "og:image", content: "/og-image.svg" },
-      { property: "og:url", content: "https://kongofix.com" },
+      { property: "og:url", content: "https://www.kongofix.com" },
       { name: "twitter:card", content: "summary" },
     ],
   }),

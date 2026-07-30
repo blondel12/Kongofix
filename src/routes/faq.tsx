@@ -7,8 +7,8 @@ const faqBreadcrumbJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kongofix.com/" },
-    { "@type": "ListItem", "position": 2, "name": "FAQ", "item": "https://kongofix.com/faq" },
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.kongofix.com/" },
+    { "@type": "ListItem", "position": 2, "name": "FAQ", "item": "https://www.kongofix.com/faq" },
   ],
 });
 
@@ -131,7 +131,7 @@ export const Route = createFileRoute("/faq")({
           "Questions fréquentes sur KongoFix : fonctionnement, tarifs, inscription technicien, zones couvertes, urgences et plus.",
       },
       { property: "og:image", content: "/og-image.svg" },
-      { property: "og:url", content: "https://kongofix.com/faq" },
+      { property: "og:url", content: "https://www.kongofix.com/faq" },
       { name: "twitter:card", content: "summary" },
     ],
     scripts: [

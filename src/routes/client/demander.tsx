@@ -34,9 +34,9 @@ const demanderBreadcrumbJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kongofix.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Trouver un technicien", "item": "https://kongofix.com/client" },
-    { "@type": "ListItem", "position": 3, "name": "Demander une intervention", "item": "https://kongofix.com/client/demander" },
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.kongofix.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Trouver un technicien", "item": "https://www.kongofix.com/client" },
+    { "@type": "ListItem", "position": 3, "name": "Demander une intervention", "item": "https://www.kongofix.com/client/demander" },
   ],
 });
 

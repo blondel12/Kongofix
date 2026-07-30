@@ -18,8 +18,8 @@ const aProposBreadcrumbJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kongofix.com/" },
-    { "@type": "ListItem", "position": 2, "name": "À propos", "item": "https://kongofix.com/a-propos" },
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.kongofix.com/" },
+    { "@type": "ListItem", "position": 2, "name": "À propos", "item": "https://www.kongofix.com/a-propos" },
   ],
 });
 

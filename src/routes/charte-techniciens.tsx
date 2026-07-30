@@ -17,8 +17,8 @@ const charteBreadcrumbJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kongofix.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Charte des techniciens", "item": "https://kongofix.com/charte-techniciens" },
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.kongofix.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Charte des techniciens", "item": "https://www.kongofix.com/charte-techniciens" },
   ],
 });
 
