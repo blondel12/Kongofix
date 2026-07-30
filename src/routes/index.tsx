@@ -549,10 +549,10 @@ function Home() {
 
           {/* Facebook */}
           <a
-            href="https://facebook.com/kongofix"
+            href={process.env.VITE_FACEBOOK_URL || "#"}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground hover:text-[#1877F2] transition-colors"
+            className={`text-muted-foreground hover:text-[#1877F2] transition-colors ${!process.env.VITE_FACEBOOK_URL ? "hidden" : ""}`}
             aria-label="Facebook KongoFix"
             title="Facebook"
           >
